@@ -26,15 +26,13 @@ def scanNews():
 def writeToFile(listToWrite):
 	f = open('news','w')
 	for item in listToWrite:
-		f.write(item['title'] + " /Score: " + str(item['score']) + "\n") # python will convert \n to os.linesep
+		f.write(item['title'] + " /Score: " + str(item['score']) + "\n")
 	f.close()
 
 def timerHandler():
 	scanNews()
 	sortedlist = sorted(titles, key=lambda k: k['score'])
 	writeToFile(sortedList)
-	#for item in sortedlist:
-	#	print item['title'] + " /Score: " + str(item['score'])
 	threading.Timer(600, timerHandler).start()
 
 timerHandler()
