@@ -1,5 +1,6 @@
 import requests
 import time, threading
+import codecs
 from bs4 import BeautifulSoup
 
 titles = []
@@ -24,7 +25,7 @@ def scanNews():
 		currentScore = currentScore - 1
 
 def writeToFile(listToWrite):
-	f = open('news','w')
+	f = codecs.open('news','w','utf-8')
 	for item in listToWrite:
 		f.write(item['title'] + " /Score: " + str(item['score']) + "\n")
 	f.close()
@@ -32,7 +33,7 @@ def writeToFile(listToWrite):
 def timerHandler():
 	scanNews()
 	sortedlist = sorted(titles, key=lambda k: k['score'])
-	writeToFile(sortedList)
+	writeToFile(sortedlist)
 	threading.Timer(600, timerHandler).start()
 
 timerHandler()
