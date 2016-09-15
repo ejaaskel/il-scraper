@@ -6,7 +6,13 @@ from bs4 import BeautifulSoup
 titles = []
 
 def scanNews():
-	r = requests.get("http://www.iltalehti.fi")
+	r = None
+	try:
+		r = requests.get("http://www.iltalehti.fi")
+	except SocketError as e:
+		return
+	if r == None:
+		return
 	soup = BeautifulSoup(r.content)
 	soupDiv = BeautifulSoup(str(soup.find("div", {"id": "iltab_luetuimmat-kaikki2"})))
 	currentScore = 20
