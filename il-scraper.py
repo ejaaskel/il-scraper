@@ -2,6 +2,7 @@ import requests
 import time, threading
 import codecs
 from bs4 import BeautifulSoup
+from socket import error as SocketError
 
 titles = []
 
